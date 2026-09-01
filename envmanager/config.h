@@ -41,9 +41,9 @@ const QMap<QString, QMap<QString, QVariant>> PLASMAKEYBOARDRC_SETTINGS = {{"Gene
 const QMap<QString, QMap<QString, QVariant>> KWINRC_DEFAULT_SETTINGS = {
     {"Wayland", {{"InputMethod", "/usr/share/applications/org.kde.plasma.keyboard.desktop"}}}};
 
-QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_bigscreenConfig)
+inline QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(const KSharedConfig::Ptr &bigscreenConfig)
 {
-    auto group = KConfigGroup{m_bigscreenConfig, QStringLiteral("General")};
+    auto group = KConfigGroup{bigscreenConfig, QStringLiteral("General")};
     bool windowDecorationsEnabled = group.readEntry("windowDecorationsEnabled", false);
 
     return {{"Windows",

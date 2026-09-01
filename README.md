@@ -1,136 +1,87 @@
-<!--
-- SPDX-FileCopyrightText: None
-- SPDX-License-Identifier: CC0-1.0
--->
-
 # Plasma Bigscreen
 
-This repository contains shell components for Plasma Bigscreen.
+[![License: GPL-2.0-or-later](https://img.shields.io/badge/License-GPL%202.0%2B-blue.svg)](LICENSES/GPL-2.0-or-later.txt)
+[![KDE Frameworks](https://img.shields.io/badge/KF6-6.14.0%2B-brightgreen.svg)](https://kde.org)
+[![Qt](https://img.shields.io/badge/Qt-6.10.0%2B-green.svg)](https://www.qt.io)
 
-* Project page: [plasma-bigscreen.org](https://plasma-bigscreen.org)
-* Repository: [invent.kde.org/plasma/plasma-bigscreen](https://invent.kde.org/plasma/plasma-bigscreen)
-* Documentation: [plasma-bigscreen.org/docs](https://plasma-bigscreen.org/docs/)
-* Wiki: [userbase.kde.org/Plasma_Bigscreen](https://userbase.kde.org/Plasma_Bigscreen)
-* Development channel: [matrix.to/#/#plasma-bigscreen:kde.org](https://matrix.to/#/#plasma-bigscreen:kde.org)
+Plasma Bigscreen is an open-source, Wayland-native desktop shell and media-center environment designed for TVs, HTPCs, and Single Board Computers (SBCs). It provides large-format navigation tailored for game controllers and TV remote controls.
 
-Plasma Bigscreen is a user-friendly, open-source, Wayland desktop environment designed for devices like HTPCs and SBCs connected to TVs and projectors. It provides an intuitive experience that allows for easy navigation from a distance using remote controls. Discover an engaging environment that adapts to your preferences, offering the safety and privacy protection that come with free and open source software!
+### Key Features
+- **Remote & Controller Navigation**: Built-in CEC and SDL3 game controller support via `plasma-bigscreen-inputhandler`.
+- **Media-Center Shell**: Tailored homescreen containment, indicators, application launcher, and audio output selector.
+- **Integrated Applications**: Standalone settings manager, WebApp viewer, and UVC camera/device viewer.
+- **KDE Ecosystem**: Seamless integration with KDE Connect, KWin Wayland, and Kirigami UI controls.
 
-<img src="lookandfeel/contents/splash/images/logo-big.svg" width=100px/>
+---
 
-### Locations
+## Installation & Build
 
-* [components](components) - Shell components & controls libraries
-* [containments](containments) - Shell components (homescreen)
-* [envmanager](envmanager) - Utility that sets Plasma configuration
-* [inputhandler](inputhandler) - Daemon that interprets controllers and TV remotes as keyboard input
-* [kcms](kcms) - Settings modules
-* [lookandfeel](lookandfeel/contents) - Plasma look-and-feel package
-* [scripts](scripts) - Validation and development helper scripts
-* [settingsapp](settingsapp) - The standalone settings application
-* [shell](shell) - Plasma shell package, provides implementations for applet and containment configuration dialogs
-* [tests](tests) - Automated test suites and verification scripts
-* [uvcviewer](uvcviewer) - Standalone application to view camera input, paired with a UVC adapter it can view input from other devices (ex. consoles)
-* [webapp-viewer](webapp-viewer) - Application to view webapps added from the settings
-
-<img src="/screenshots/homescreen.png" width=500px/>
-
-### CEC and controller support
-
-The `plasma-bigscreen-inputhandler` utility daemon handles CEC and game controller support. You can manually run it with:
+Build and install using CMake (single command block):
 
 ```bash
-PLASMA_PLATFORM=mediacenter plasma-bigscreen-inputhandler
+git clone https://github.com/khSafvan/plasma-bigscreen.git && cd plasma-bigscreen && cmake -B build -S . -DCMAKE_INSTALL_PREFIX=/usr && cmake --build build && sudo cmake --install build
 ```
-
-For CEC support, ensure that your user has permission to access the device:
-
-```bash
-usermod -aG input $USER
-```
-
-If that doesn't work, the [udev rule](https://invent.kde.org/plasma/plasma-bigscreen/-/blob/master/inputhandler/40-uinput.rules) might not be working. Try this broader permission:
-
-```bash
-ls -l /dev/ttyACM* # Find the group the cec device belongs to
-
-usermod -aG dialout $USER # Replace dialout with the group that the cec device belongs to
-```
-
-### Test on a development machine
-
-It is recommended to use `kde-builder` to build this from source.
-See [this wiki page](https://invent.kde.org/plasma/plasma-bigscreen/-/wikis/Building-and-Testing-Locally) in order to set it up.
 
 <details>
-<summary><b>Click here to see dependencies</b></summary>
+<summary><b>Building with kde-builder (Alternative)</b></summary>
 
-### KDE Plasma Dependencies
-
-- [Plasma Nano](https://invent.kde.org/plasma/plasma-nano)
-- [Plasma NM](https://invent.kde.org/plasma/plasma-nm)
-- [Plasma PA](https://invent.kde.org/plasma/plasma-pa)
-- [Milou](https://invent.kde.org/plasma/milou)
-- [KScreen](https://invent.kde.org/plasma/libkscreen)
-- [KWin](https://invent.kde.org/plasma/kwin)
-
-### KDE Frameworks Dependencies
-
-- Activities
-- ActivitiesStats
-- Plasma
-- BluezQt
-- I18n
-- [Kirigami](https://invent.kde.org/frameworks/kirigami)
-- KCMUtils
-- GlobalAccel
-- Notifications
-- PlasmaQuick
-- KIO
-- Wayland
-- WindowSystem
-- [KDE Connect](https://invent.kde.org/network/kdeconnect-kde)
-- SVG
-
-### Other dependencies
-
-- QCoro
-- SDL (for game controller support)
-- libcec (optional: for TV Controller support)
-
+```bash
+kde-builder plasma-bigscreen
+```
+See the [Building and Testing Locally](https://invent.kde.org/plasma/plasma-bigscreen/-/wikis/Building-and-Testing-Locally) wiki for details on managing development prefixes.
 </details>
 
-To start the Bigscreen homescreen in a window, you can use the following script:
+---
+
+## Development & Live-Reload Setup
+
+### Prerequisites
+- **Qt 6**: `Qt6::Core`, `Qt6::Quick`, `Qt6::Qml`, `Qt6::DBus`, `Qt6::Network`, `Qt6::Multimedia`, `Qt6::WebEngineCore`, `Qt6::WaylandClient`
+- **KDE Frameworks 6**: `KF6::Kirigami`, `KF6::I18n`, `KF6::KCMUtils`, `KF6::BluezQt`, `KF6::KIO`, `KF6::Notifications`, `KF6::WindowSystem`, `KF6::Svg`
+- **System Libraries**: `SDL3`, `libcec` (>= 6.0), `systemd`
+
+### Running Bigscreen in a Window
+To test the shell locally inside a Wayland nested window session:
 
 ```bash
 #!/usr/bin/env bash
-
-# Environment variables
 export QT_QUICK_CONTROLS_STYLE=org.kde.breeze
 export QT_ENABLE_GLYPH_CACHE_WORKAROUND=1
 export QT_QUICK_CONTROLS_MOBILE=true
 export PLASMA_INTEGRATION_USE_PORTAL=1
 export PLASMA_PLATFORM=mediacenter
 export QT_FILE_SELECTORS=mediacenter
-
-# Set ~/.config/plasma-bigscreen/... as location for default bigscreen configs (i.e. envmanager generated)
 export XDG_CONFIG_DIRS="$HOME/.config/plasma-bigscreen:/etc/xdg${XDG_CONFIG_DIRS:+:$XDG_CONFIG_DIRS}"
 
-# Ensure that environment settings are set prior to loading the shell
 QT_QPA_PLATFORM=offscreen plasma-bigscreen-envmanager --apply-settings
-
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.bigscreen
 dbus-run-session kwin_wayland "plasmashell -p org.kde.plasma.bigscreen"
 ```
 
-### Development & Quality Checks
+### Running Input Handler Daemon
+```bash
+PLASMA_PLATFORM=mediacenter plasma-bigscreen-inputhandler
+```
 
-Run the automated verification suite (syntax verification, JSON schema validation, and unit tests):
+### Live-Reload & Rapid QML Testing
+> [!NOTE]
+> Native C++/QML desktop environments do not include an out-of-the-box live reload daemon.
+
+For rapid development and auto-reloading of QML components during iteration, use `plasmoidviewer` with a file watcher (e.g., `nodemon` or `entr`):
+
+```bash
+# Watch homescreen containment and reload on file change
+npx nodemon --watch containments/homescreen -e qml,js --exec 'plasmoidviewer -a containments/homescreen/package'
+```
+
+### Quality & Verification Suite
+Run the test and verification runner (validates shell scripts, JSON metadata, and JavaScript logic):
 
 ```bash
 ./scripts/verify-all.sh
 ```
 
-Or using npm scripts:
+Or via npm:
 
 ```bash
 npm test
@@ -138,7 +89,33 @@ npm run lint
 npm run format:check
 ```
 
-<br/>
+---
 
-<img src="https://invent.kde.org/plasma/plasma-bigscreen/-/wikis/uploads/92914bdc119ad89fb0436c1ad59e1375/image.png" width=300px>
+## License & Credits
 
+### Upstream Project
+This repository is a maintained fork of [KDE Plasma Bigscreen](https://invent.kde.org/plasma/plasma-bigscreen) created and maintained by the **KDE Community**.
+
+- **Upstream Repository**: [invent.kde.org/plasma/plasma-bigscreen](https://invent.kde.org/plasma/plasma-bigscreen)
+- **Project Homepage**: [plasma-bigscreen.org](https://plasma-bigscreen.org)
+- **Original Authors & Contributors**:
+  - Aditya Mehra (<aix.m@outlook.com>)
+  - Marco Martin (<mart@kde.org>)
+  - Devin Lin (<devin@kde.org>)
+  - Aleix Pol Gonzalez (<aleixpol@kde.org>)
+  - Bart Ribbers (<bribbers@disroot.org>)
+  - Yuri Chornoivan
+  - Harald Sitter (<sitter@kde.org>)
+  - Seshan Ravikumar (<seshan@sineware.ca>)
+  - Jonah Brüchert (<jbb@kaidan.im>)
+  - And all contributors to the KDE Project.
+
+### Fork Information
+- **Fork Maintainer**: Safvan Khalifa ([@khSafvan](https://github.com/khSafvan))
+- **Fork Repository**: [github.com/khSafvan/plasma-bigscreen](https://github.com/khSafvan/plasma-bigscreen)
+
+### License
+All source code in this repository is licensed under the original licensing terms:
+- C++ / QML source and components: **GNU General Public License v2.0 or later** ([GPL-2.0-or-later](LICENSES/GPL-2.0-or-later.txt)) / **GNU Lesser General Public License v2.1 or later** ([LGPL-2.1-or-later](LICENSES/LGPL-2.1-or-later.txt)).
+- Artwork, documentation, and configuration files: **CC-BY-SA-4.0** / **CC0-1.0** ([LICENSES/](LICENSES)).
+- See individual file headers and `.reuse/` metadata for specific SPDX identifier tags.
