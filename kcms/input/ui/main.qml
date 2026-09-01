@@ -103,7 +103,7 @@ Bigscreen.ScrollablePage {
         Bigscreen.TextDelegate {
             visible: !kcm.serviceAvailable
             text: i18n("Input daemon is not running")
-            description: i18n("Controller and remote settings are only available when plasma-bigscreen-inputhandler is running")
+            description: i18n("Controller and remote settings are only available when plasmacouch-inputhandler is running")
             icon.name: "dialog-warning-symbolic"
         }
 

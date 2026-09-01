@@ -12,14 +12,14 @@ K_PLUGIN_FACTORY_WITH_JSON(StartFactory, "kded_plasma_bigscreen_start.json", reg
 Start::Start(QObject *parent, const QList<QVariant> &)
     : KDEDModule{parent}
 {
-    auto *envmanagerJob = new KIO::CommandLauncherJob(QStringLiteral("plasma-bigscreen-envmanager --apply-settings"), {});
+    auto *envmanagerJob = new KIO::CommandLauncherJob(QStringLiteral("plasmacouch-envmanager --apply-settings"), {});
     envmanagerJob->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
-    envmanagerJob->setDesktopName(QStringLiteral("org.kde.plasma.bigscreen.envmanager"));
+    envmanagerJob->setDesktopName(QStringLiteral("com.plasmacouch.envmanager"));
     envmanagerJob->start();
 
-    auto *inputmanagerJob = new KIO::CommandLauncherJob(QStringLiteral("plasma-bigscreen-inputhandler"), {});
+    auto *inputmanagerJob = new KIO::CommandLauncherJob(QStringLiteral("plasmacouch-inputhandler"), {});
     inputmanagerJob->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
-    inputmanagerJob->setDesktopName(QStringLiteral("org.kde.plasma.bigscreen.inputhandler"));
+    inputmanagerJob->setDesktopName(QStringLiteral("com.plasmacouch.inputhandler"));
     inputmanagerJob->start();
 }
 

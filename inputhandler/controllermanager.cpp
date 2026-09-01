@@ -239,7 +239,7 @@ void ControllerManager::resetInputSystem()
 
     // No input system available
     m_inputSystem.reset();
-    qWarning() << "Could not setup input system, plasma-bigscreen-inputhandler will not be able to send events";
+    qWarning() << "Could not setup input system, plasmacouch-inputhandler will not be able to send events";
 }
 
 bool ControllerManager::enabled() const

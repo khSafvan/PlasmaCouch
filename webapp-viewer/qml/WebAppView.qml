@@ -7,7 +7,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
-import org.kde.bigscreen.webapp as WebApp
+import com.plasmacouch.webapp as WebApp
 
 WebView {
     id: webEngineView
@@ -18,7 +18,7 @@ WebView {
     profile: WebApp.WebProfile {
         httpUserAgent: WebApp.UserAgent.userAgent
         offTheRecord: false
-        storageName: "plasma-bigscreen-webapp"
+        storageName: "plasmacouch-webapp"
 
         onHttpUserAgentChanged: console.log("User agent set: " + httpUserAgent)
     }

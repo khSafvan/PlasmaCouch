@@ -87,9 +87,9 @@ void HomeScreen::openSettings(QString module)
     Q_EMIT minimizeAllTasksRequested();
 
     if (module.isEmpty()) {
-        executeCommand(QStringLiteral("plasma-bigscreen-settings"));
+        executeCommand(QStringLiteral("plasmacouch-settings"));
     } else {
-        executeCommand(QStringLiteral("plasma-bigscreen-settings -m ") + module);
+        executeCommand(QStringLiteral("plasmacouch-settings -m ") + module);
     }
 }
 

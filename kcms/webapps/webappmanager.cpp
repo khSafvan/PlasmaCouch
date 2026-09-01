@@ -155,7 +155,7 @@ QString WebAppManager::generateFileName(const QString &name)
     filename.remove(u',');
     filename.remove(u'.');
     filename.remove(u'|');
-    return u"bigscreen-webapp-" + filename;
+    return u"plasmacouch-webapp-" + filename;
 }
 
 QString WebAppManager::generateDesktopFileName(const QString &name)
@@ -165,7 +165,7 @@ QString WebAppManager::generateDesktopFileName(const QString &name)
 
 QString WebAppManager::webAppCommand()
 {
-    return QStringLiteral("plasma-bigscreen-webapp");
+    return QStringLiteral("plasmacouch-webapp");
 }
 
 #include "moc_webappmanager.cpp"

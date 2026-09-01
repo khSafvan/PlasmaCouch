@@ -19,6 +19,8 @@ constexpr uint DEVICE_ALL = DEVICE_KEYBOARD | DEVICE_POINTER;
 
 static const QStringList s_appIds = {
     QString(),
+    QStringLiteral("com.plasmacouch.inputhandler"),
+    QStringLiteral("plasmacouch-inputhandler"),
     QStringLiteral("org.kde.plasma.bigscreen.inputhandler"),
     QStringLiteral("plasma-bigscreen-inputhandler"),
 };

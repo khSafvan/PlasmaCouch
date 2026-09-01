@@ -24,7 +24,7 @@ const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_DEFAULT_SETT
              "waydroid.com.android.documentsui,waydroid.com.android.gallery3d,waydroid.com.android.inputmethod.latin,"
              "waydroid.com.android.settings,waydroid.org.lineageos.eleven,waydroid.org.lineageos.etar,waydroid.org.lineageos.jelly,"
              "waydroid.org.lineageos.recorder,org.kde.drkonqi.coredump.gui,org.kde.kdeconnect.app,org.kde.kdeconnect.sms,systemsettings,"
-             "plasma-bigscreen-swap-session.desktop"
+             "plasma-bigscreen-swap-session.desktop,plasmacouch-swap-session.desktop"
         }}
     }
 };

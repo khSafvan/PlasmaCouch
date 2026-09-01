@@ -38,7 +38,7 @@ void WebProfile::handleDownloadFinished(DownloadItem *downloadItem)
 void WebProfile::showNotification(QWebEngineNotification *webNotification)
 {
     auto *notification = new KNotification(QStringLiteral("web-notification"));
-    notification->setComponentName(QStringLiteral("plasma-bigscreen"));
+    notification->setComponentName(QStringLiteral("plasmacouch"));
     notification->setTitle(webNotification->title());
     notification->setText(webNotification->message());
     notification->setPixmap(QPixmap::fromImage(webNotification->icon()));

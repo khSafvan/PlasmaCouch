@@ -65,9 +65,9 @@ void BigscreenShellSettings::setWindowDecorationsEnabled(bool windowDecorationsE
     m_config->sync();
 
     // Update environment settings
-    auto *job = new KIO::CommandLauncherJob(QStringLiteral("plasma-bigscreen-envmanager --apply-settings"), {});
+    auto *job = new KIO::CommandLauncherJob(QStringLiteral("plasmacouch-envmanager --apply-settings"), {});
     job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
-    job->setDesktopName(QStringLiteral("org.kde.plasma-bigscreen-envmanager"));
+    job->setDesktopName(QStringLiteral("com.plasmacouch-envmanager"));
     job->start();
 }
 
