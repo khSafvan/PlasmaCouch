@@ -1,0 +1,13 @@
+node_modules
+build
+cmake-build*
+po
+*.po
+*.pot
+*.svg
+*.svgz
+*.png
+*.wav
+*.rules
+*.kcfg
+*.kcfgc

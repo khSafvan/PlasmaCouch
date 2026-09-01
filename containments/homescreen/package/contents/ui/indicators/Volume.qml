@@ -13,8 +13,6 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.nanoshell as NanoShell
 import org.kde.plasma.plasmoid
 
-import "code/icon.js" as Icon
-
 AbstractIndicator {
     id: paIcon
     text: i18n("Audio Settings")

@@ -4,32 +4,41 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-function name(volume, muted, prefix) {
-    if (!prefix) {
-        prefix = "audio-volume";
-    }
-    var icon = null;
-    var percent = volume / maxVolumeValue;
+/**
+ * Returns an audio icon name based on volume level and mute state.
+ *
+ * @param {number} volume - Current volume level value.
+ * @param {boolean} muted - Whether the audio device is muted.
+ * @param {string} [prefix="audio-volume"] - Icon name prefix (e.g., "audio-volume" or "microphone-sensitivity").
+ * @param {number} [maxVolume=65536] - Maximum volume scaling factor.
+ * @returns {string} The icon theme name corresponding to the volume level.
+ */
+function name(volume, muted, prefix = "audio-volume", maxVolume = 65536) {
+    const percent = volume / maxVolume;
+
     if (percent <= 0.0 || muted) {
-        icon = prefix + "-muted";
+        return `${prefix}-muted`;
     } else if (percent <= 0.25) {
-        icon = prefix + "-low";
+        return `${prefix}-low`;
     } else if (percent <= 0.75) {
-        icon = prefix + "-medium";
-    } else {
-        icon = prefix + "-high";
+        return `${prefix}-medium`;
     }
-    return icon;
+    return `${prefix}-high`;
 }
 
+/**
+ * Returns an icon name representing the device form factor.
+ *
+ * @param {string} formFactor - The form factor type identifier.
+ * @returns {string} The icon name for the specified form factor.
+ */
 function formFactorIcon(formFactor) {
-    switch(formFactor) {
+    switch (formFactor) {
         case "internal":
             return "audio-card";
         case "speaker":
             return "audio-speakers-symbolic";
         case "phone":
-            return "phone";
         case "handset":
             return "phone";
         case "tv":
@@ -52,7 +61,8 @@ function formFactorIcon(formFactor) {
             return "computer";
         case "portable":
             return "portable";
+        default:
+            return "";
     }
-    return "";
 }
  

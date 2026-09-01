@@ -1,0 +1,28 @@
+{
+  "name": "plasma-bigscreen",
+  "version": "6.0.0",
+  "description": "KDE Plasma Bigscreen - User-friendly interface for big screens, TVs, and HTPCs",
+  "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "bash scripts/verify-all.sh",
+    "verify": "bash scripts/verify-all.sh"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.2.0"
+  },
+  "keywords": [
+    "kde",
+    "plasma",
+    "bigscreen",
+    "tv",
+    "htpc"
+  ],
+  "author": "KDE Community",
+  "license": "GPL-2.0-or-later"
+}

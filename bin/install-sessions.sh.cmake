@@ -5,22 +5,31 @@
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-set -e
+set -eu
 
-# Make built-from-source sessions appear in login screen
-sudo install @CMAKE_CURRENT_BINARY_DIR@/plasma-bigscreen-wayland-dev.desktop /usr/share/wayland-sessions/
-install @CMAKE_CURRENT_BINARY_DIR@/plasma-bigscreen-wayland-dev @CMAKE_INSTALL_FULL_LIBEXECDIR@
+# Step 1: Install wayland session desktop file and binary for login managers
+echo "Installing wayland-dev session desktop file..."
+sudo install -m 644 "@CMAKE_CURRENT_BINARY_DIR@/plasma-bigscreen-wayland-dev.desktop" /usr/share/wayland-sessions/
 
-# Make the system DBus able to see any new DBus files that have been added to
-# the built-from-source plasma session which are not yet present in the system
-# DBus locations. Because some distros have security policies which prevent the
-# use of DBus files in a user's homedir, and even symlinks outside,
-# we have to copy the files into a system-owned location.
+echo "Installing wayland-dev launcher binary..."
+install -m 755 "@CMAKE_CURRENT_BINARY_DIR@/plasma-bigscreen-wayland-dev" "@CMAKE_INSTALL_FULL_LIBEXECDIR@"
+
+# Step 2: Make system D-Bus able to see new D-Bus files added to the built session.
+# Because some distributions have security policies preventing D-Bus file usage
+# from user homedirs, files are mirrored into /opt/kde-dbus-scripts/
+echo "Configuring D-Bus system overrides..."
 sudo mkdir -p /opt/kde-dbus-scripts/
-sudo cp -r @KDE_INSTALL_FULL_DBUSDIR@/* /opt/kde-dbus-scripts/
-if [ ! -f /etc/dbus-1/session-local.conf ]
-then
-    cat > session-local.conf << EOF
+
+if [ -d "@KDE_INSTALL_FULL_DBUSDIR@" ]; then
+    sudo cp -r "@KDE_INSTALL_FULL_DBUSDIR@"/* /opt/kde-dbus-scripts/ 2>/dev/null || true
+fi
+
+# Step 3: Create session-local D-Bus config if not already present
+if [ ! -f /etc/dbus-1/session-local.conf ]; then
+    TMP_CONF="$(mktemp)"
+    trap 'rm -f "${TMP_CONF}"' EXIT
+
+    cat > "${TMP_CONF}" << 'EOF'
 <busconfig>
 	<servicedir>/opt/kde-dbus-scripts/services</servicedir>
 	<servicedir>/opt/kde-dbus-scripts/system-services</servicedir>
@@ -28,6 +37,11 @@ then
 	<includedir>/opt/kde-dbus-scripts/interfaces/</includedir>
 </busconfig>
 EOF
-    sudo mv session-local.conf /etc/dbus-1/
+
+    sudo install -m 644 "${TMP_CONF}" /etc/dbus-1/session-local.conf
+    rm -f "${TMP_CONF}"
+    trap - EXIT
 fi
+
+echo "Session installation complete."
 

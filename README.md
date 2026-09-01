@@ -25,8 +25,10 @@ Plasma Bigscreen is a user-friendly, open-source, Wayland desktop environment de
 * [inputhandler](inputhandler) - Daemon that interprets controllers and TV remotes as keyboard input
 * [kcms](kcms) - Settings modules
 * [lookandfeel](lookandfeel/contents) - Plasma look-and-feel package
+* [scripts](scripts) - Validation and development helper scripts
 * [settingsapp](settingsapp) - The standalone settings application
 * [shell](shell) - Plasma shell package, provides implementations for applet and containment configuration dialogs
+* [tests](tests) - Automated test suites and verification scripts
 * [uvcviewer](uvcviewer) - Standalone application to view camera input, paired with a UVC adapter it can view input from other devices (ex. consoles)
 * [webapp-viewer](webapp-viewer) - Application to view webapps added from the settings
 
@@ -100,7 +102,7 @@ See [this wiki page](https://invent.kde.org/plasma/plasma-bigscreen/-/wikis/Buil
 To start the Bigscreen homescreen in a window, you can use the following script:
 
 ```bash
-#/bin/bash
+#!/usr/bin/env bash
 
 # Environment variables
 export QT_QUICK_CONTROLS_STYLE=org.kde.breeze
@@ -111,15 +113,32 @@ export PLASMA_PLATFORM=mediacenter
 export QT_FILE_SELECTORS=mediacenter
 
 # Set ~/.config/plasma-bigscreen/... as location for default bigscreen configs (i.e. envmanager generated)
-export XDG_CONFIG_DIRS="$HOME/.config/plasma-bigscreen:/etc/xdg:$XDG_CONFIG_DIRS"
+export XDG_CONFIG_DIRS="$HOME/.config/plasma-bigscreen:/etc/xdg${XDG_CONFIG_DIRS:+:$XDG_CONFIG_DIRS}"
 
-# ensure that we have our environment settings set properly prior to the shell being loaded (otherwise there is a race condition with autostart)
+# Ensure that environment settings are set prior to loading the shell
 QT_QPA_PLATFORM=offscreen plasma-bigscreen-envmanager --apply-settings
 
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.bigscreen
 dbus-run-session kwin_wayland "plasmashell -p org.kde.plasma.bigscreen"
 ```
 
+### Development & Quality Checks
+
+Run the automated verification suite (syntax verification, JSON schema validation, and unit tests):
+
+```bash
+./scripts/verify-all.sh
+```
+
+Or using npm scripts:
+
+```bash
+npm test
+npm run lint
+npm run format:check
+```
+
 <br/>
 
 <img src="https://invent.kde.org/plasma/plasma-bigscreen/-/wikis/uploads/92914bdc119ad89fb0436c1ad59e1375/image.png" width=300px>
+

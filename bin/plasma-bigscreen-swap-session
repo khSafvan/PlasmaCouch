@@ -2,18 +2,21 @@
 # SPDX-FileCopyrightText: 2025 Seshan Ravikumar <seshan@sineware.ca>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-if [ -z "$XDG_CURRENT_DESKTOP" ] || [ "$XDG_CURRENT_DESKTOP" != "KDE" ]; then
-    echo "This script can only be run on KDE Plasma."
+set -eu
+
+# Verify that current session is KDE Plasma
+if [ "${XDG_CURRENT_DESKTOP:-}" != "KDE" ]; then
+    echo "Error: This script can only be run on KDE Plasma." >&2
     exit 1
 fi
 
 CACHE_DIR="$HOME/.cache/plasma-bigscreen"
 SAVED_ENV="$CACHE_DIR/saved-env"
 
-mkdir -pv "$CACHE_DIR"
+mkdir -p "$CACHE_DIR"
 
 swap_to_bigscreen() {
-    # Save current environment for restoration
+    # Save current environment for subsequent restoration
     export -p > "$SAVED_ENV"
 
     # Source Bigscreen common environment
@@ -21,28 +24,33 @@ swap_to_bigscreen() {
 
     export PLASMA_BIGSCREEN_LAUNCH_REASON=swap
 
-    # Start plasma-bigscreen-inputhandler
+    # Start plasma-bigscreen-inputhandler in the background
     QT_QPA_PLATFORM=offscreen plasma-bigscreen-inputhandler &
 
+    # Replace running plasmashell instance with Bigscreen shell
     plasmashell --replace &
 }
 
 swap_to_default() {
-    # Restore saved environment
-    . "$SAVED_ENV"
-    rm "$SAVED_ENV"
+    # Restore saved environment if available
+    if [ -f "$SAVED_ENV" ]; then
+        . "$SAVED_ENV"
+        rm -f "$SAVED_ENV"
+    fi
 
-    unset PLASMA_BIGSCREEN_LAUNCH_REASON
+    unset PLASMA_BIGSCREEN_LAUNCH_REASON || true
 
-    # Kill plasma-bigscreen-inputhandler
-    pkill -f plasma-bigscreen-inputhandler
+    # Gracefully stop plasma-bigscreen-inputhandler
+    pkill -f plasma-bigscreen-inputhandler 2>/dev/null || true
 
+    # Replace running plasmashell instance with default desktop shell
     plasmashell --replace &
 }
 
-if [ "$PLASMA_BIGSCREEN_LAUNCH_REASON" = "swap" ]; then
-    # If already in Bigscreen mode, switch back to default Plasma
+# Toggle between Bigscreen shell and default Plasma desktop
+if [ "${PLASMA_BIGSCREEN_LAUNCH_REASON:-}" = "swap" ]; then
     swap_to_default
 else
     swap_to_bigscreen
 fi
+

@@ -1,12 +1,41 @@
 # SPDX-FileCopyrightText: None
 # SPDX-License-Identifier: CC0-1.0
 
-# LSP & IDE
-/.clang-format
-/compile_commands.json
-.clangd
-.cache
-.idea
+# Build Artifacts & CMake
 /cmake-build*
-build
-.vscode
+/build/
+build/
+*.o
+*.so
+*.a
+compile_commands.json
+
+# LSP & IDEs
+/.clang-format
+.clangd/
+.cache/
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node & Tooling
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+package-lock.json
+
+# Testing & Coverage
+coverage/
+.nyc_output/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Translations & Generated Files
+rc.cpp
+*.pot

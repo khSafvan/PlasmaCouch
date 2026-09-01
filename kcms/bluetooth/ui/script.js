@@ -7,6 +7,12 @@
 
 .import org.kde.bluezqt as BluezQt
 
+/**
+ * Returns a human-readable, localized string describing the type of a Bluetooth device.
+ *
+ * @param {object} device - The BluezQt device object containing type and uuids.
+ * @returns {string} Localized description of device type or supported profiles.
+ */
 function deviceTypeToString(device) {
     switch (device.type) {
         case BluezQt.Device.Phone:
@@ -45,7 +51,7 @@ function deviceTypeToString(device) {
             return i18nc("This device is a Toy", "Toy");
         case BluezQt.Device.Health:
             return i18nc("This device is a Health device", "Health");
-        default:
+        default: {
             const { uuids } = device;
             const profiles = [];
 
@@ -70,9 +76,16 @@ function deviceTypeToString(device) {
             }
 
             return profiles.join(i18nc("List separator", ", "));
+        }
     }
 }
 
+/**
+ * Connects a callback function to the finish signal of an async BluezQt call.
+ *
+ * @param {object} call - The asynchronous pending call object.
+ * @param {Function} cb - Callback function to invoke when the call finishes.
+ */
 function makeCall(call, cb) {
     call.finished.connect(cb);
 }
