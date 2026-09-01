@@ -2,12 +2,13 @@
 # SPDX-FileCopyrightText: 2020 Bart Ribbers <bribbers@disroot.org>
 # SPDX-FileCopyrightText: 2021 Aleix Pol <apol@kde.org>
 # SPDX-FileCopyrightText: 2025 Seshan Ravikumar <seshan@sineware.ca>
+# SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 set -eu
 
-# Source Bigscreen common environment
-. plasma-bigscreen-common-env
+# Source PlasmaCouch common environment
+. plasmacouch-common-env
 
-# Launch Plasma Bigscreen Wayland session
+# Launch PlasmaCouch Wayland session
 exec startplasma-wayland --xwayland --libinput --exit-with-session="@KDE_INSTALL_FULL_LIBEXECDIR@/startplasma-waylandsession" "$@"

@@ -25,9 +25,11 @@ InputHandlerDBus::InputHandlerDBus(QObject *parent)
 
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
 
-    if (!sessionBus.registerService(QStringLiteral("org.kde.plasma.bigscreen.inputhandler"))) {
-        qWarning() << "Failed to register DBus service org.kde.plasma.bigscreen.inputhandler:" << sessionBus.lastError().message();
+    if (!sessionBus.registerService(QStringLiteral("com.plasmacouch.inputhandler"))) {
+        qWarning() << "Failed to register DBus service com.plasmacouch.inputhandler:" << sessionBus.lastError().message();
     }
+    // Also register legacy service alias for backward compatibility with existing components
+    sessionBus.registerService(QStringLiteral("org.kde.plasma.bigscreen.inputhandler"));
 
     if (!sessionBus.registerObject(QStringLiteral("/InputHandler"), this)) {
         qWarning() << "Failed to register DBus object /InputHandler:" << sessionBus.lastError().message();
@@ -46,6 +48,7 @@ InputHandlerDBus::~InputHandlerDBus()
 {
     QDBusConnection sessionBus = QDBusConnection::sessionBus();
     sessionBus.unregisterObject(QStringLiteral("/InputHandler"));
+    sessionBus.unregisterService(QStringLiteral("com.plasmacouch.inputhandler"));
     sessionBus.unregisterService(QStringLiteral("org.kde.plasma.bigscreen.inputhandler"));
 }
 

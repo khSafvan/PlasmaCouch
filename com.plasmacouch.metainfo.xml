@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   - SPDX-FileCopyrightText: 2022 Aditya Mehra <aix.m@outlook.com>
+  - SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
   - SPDX-License-Identifier: MIT
   -->
 <component type="desktop-application">
-  <id>org.kde.plasma.bigscreen</id>
-  <launchable type="desktop-id">plasma-bigscreen-wayland.desktop</launchable>
-  <name>KDE Plasma Bigscreen</name>
+  <id>com.plasmacouch</id>
+  <launchable type="desktop-id">plasmacouch-wayland.desktop</launchable>
+  <name>PlasmaCouch</name>
   <name xml:lang="ar">كِيدِي بلازما الشاشة الكبيرة</name>
   <name xml:lang="az">KDE Plasma böyük ekranı</name>
   <name xml:lang="bg">KDE Plasma Bigscreen</name>

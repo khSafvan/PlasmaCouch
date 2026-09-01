@@ -1,10 +1,12 @@
 # SPDX-FileCopyrightText: 2020 Bart Ribbers <bribbers@disroot.org>
+# SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 [Desktop Entry]
-Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/plasma-dbus-run-session-if-needed ${CMAKE_INSTALL_FULL_BINDIR}/plasma-bigscreen-wayland-dev
+Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/plasma-dbus-run-session-if-needed ${CMAKE_INSTALL_FULL_BINDIR}/plasmacouch-wayland-dev
 DesktopNames=KDE
-Name=Plasma Bigscreen (Development)
+Name=PlasmaCouch (Development)
+Name[en_GB]=PlasmaCouch (Development)
 Name[ar]=بلازما الشاشة الكبيرة (تطويرية)
 Name[bg]=Plasma Bigscreen (Разработка)
 Name[ca]=Plasma Bigscreen (Desenvolupament)

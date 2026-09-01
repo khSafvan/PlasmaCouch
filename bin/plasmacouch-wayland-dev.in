@@ -1,5 +1,6 @@
 #!/bin/sh
 # SPDX-FileCopyrightText: 2019 Aleix Pol Gonzalez <aleixpol@kde.org>
+# SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
 #
 # SPDX-License-Identifier: GPL-2.0-or-later
 
@@ -19,5 +20,6 @@ if [ -n "${XDG_RUNTIME_DIR:-}" ]; then
 fi
 
 # Launch the Wayland session with forwarded arguments
-exec plasma-bigscreen-wayland "$@"
+exec plasmacouch-wayland "$@"
+
 

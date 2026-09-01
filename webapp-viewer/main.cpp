@@ -32,7 +32,7 @@ QString webAppIdFromName(const QString &name)
     filename.remove(u',');
     filename.remove(u'.');
     filename.remove(u'|');
-    return u"bigscreen-webapp-" + filename;
+    return u"plasmacouch-webapp-" + filename;
 }
 
 int main(int argc, char *argv[])
@@ -71,12 +71,12 @@ int main(int argc, char *argv[])
     const QString userAgent = parser.value(agentOption);
     const QString appId = webAppIdFromName(name);
 
-    KAboutData aboutData(QStringLiteral("plasma-bigscreen-webapp"),
+    KAboutData aboutData(QStringLiteral("plasmacouch-webapp"),
                          parser.isSet(nameOption) ? name : i18n("Webview"),
                          QStringLiteral("0.1"),
-                         i18n("Plasma Bigscreen Webapp runtime"),
+                         i18n("PlasmaCouch Webapp runtime"),
                          KAboutLicense::GPL,
-                         i18n("© 2025 Plasma developers"));
+                         i18n("© 2026 PlasmaCouch / KDE developers"));
     QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral()));
 
     KAboutData::setApplicationData(aboutData);
@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
 
     engine.setInitialProperties({{QStringLiteral("userAgent"), parser.isSet(agentOption) ? userAgent : QString{}}});
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
-    engine.loadFromModule(QStringLiteral("org.kde.bigscreen.webapp.sources"), QStringLiteral("WebApp"));
+    engine.loadFromModule(QStringLiteral("com.plasmacouch.webapp.sources"), QStringLiteral("WebApp"));
 
     // Error handling
     if (engine.rootObjects().isEmpty()) {

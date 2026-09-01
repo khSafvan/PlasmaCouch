@@ -1,7 +1,7 @@
 {
-  "name": "plasma-bigscreen",
+  "name": "plasmacouch",
   "version": "6.0.0",
-  "description": "KDE Plasma Bigscreen - User-friendly interface for big screens, TVs, and HTPCs",
+  "description": "PlasmaCouch - Controller and TV-remote-focused UI for native apps, webapps, Wine, and games",
   "private": true,
   "scripts": {
     "lint": "eslint .",

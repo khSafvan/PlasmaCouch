@@ -1,15 +1,15 @@
 # SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-set(plasma-bigscreen-envmanager_SRCS
+set(plasmacouch-envmanager_SRCS
     main.cpp
     settings.cpp
     utils.cpp
     config.h
 )
 
-add_executable(plasma-bigscreen-envmanager ${plasma-bigscreen-envmanager_SRCS})
-target_link_libraries(plasma-bigscreen-envmanager
+add_executable(plasmacouch-envmanager ${plasmacouch-envmanager_SRCS})
+target_link_libraries(plasmacouch-envmanager
     Qt::Qml
     Qt::Gui
     Qt::Widgets
@@ -22,6 +22,7 @@ target_link_libraries(plasma-bigscreen-envmanager
     KF6::Package
 )
 
-target_include_directories(plasma-bigscreen-envmanager PRIVATE ${CMAKE_BINARY_DIR})
-install(TARGETS plasma-bigscreen-envmanager ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+target_include_directories(plasmacouch-envmanager PRIVATE ${CMAKE_BINARY_DIR})
+install(TARGETS plasmacouch-envmanager ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
 

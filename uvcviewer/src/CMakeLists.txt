@@ -1,25 +1,26 @@
 # SPDX-FileCopyrightText: 2025 Seshan Ravikumar <seshan@sineware.ca>
+# SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
 # SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-add_executable(plasma-bigscreen-uvcviewer)
+add_executable(plasmacouch-uvcviewer)
 
-ecm_add_qml_module(plasma-bigscreen-uvcviewer
+ecm_add_qml_module(plasmacouch-uvcviewer
     URI
-    org.kde.plasma.bigscreen.uvcviewer
+    com.plasmacouch.uvcviewer
 )
 
-target_sources(plasma-bigscreen-uvcviewer
+target_sources(plasmacouch-uvcviewer
     PRIVATE
     main.cpp
 )
 
-ecm_target_qml_sources(plasma-bigscreen-uvcviewer
+ecm_target_qml_sources(plasmacouch-uvcviewer
     SOURCES
     Main.qml
     UvcViewer.qml
     CameraHomePage.qml
 )
 
-target_link_libraries(plasma-bigscreen-uvcviewer
+target_link_libraries(plasmacouch-uvcviewer
     PRIVATE
     Qt6::Quick
     Qt6::Qml
@@ -30,4 +31,5 @@ target_link_libraries(plasma-bigscreen-uvcviewer
     KF6::IconThemes
 )
 
-install(TARGETS plasma-bigscreen-uvcviewer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS plasmacouch-uvcviewer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+

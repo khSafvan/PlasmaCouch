@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: 2022 Bart Ribbers <bribbers@disroot.org>
+# SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
 [Desktop Entry]
-Name=Plasma Bigscreen Input Handler
+Name=PlasmaCouch Input Handler
+Name[en_GB]=PlasmaCouch Input Handler
 Name[ar]=معالج إدخال لبلازما الشاشة الكبيرة
 Name[bg]=Управление на входните устройства
 Name[ca]=Gestor d'entrada del Plasma Bigscreen
@@ -34,7 +36,7 @@ Name[tr]=Plasma BüyükEkran Giriş İşleyicisi
 Name[uk]=Обробник вхідних даних Plasma Bigscreen
 Name[zh_CN]=Plasma 大屏幕输入处理程序
 Name[zh_TW]=Plasma 大螢幕輸入處理程式
-Exec=@CMAKE_INSTALL_PREFIX@/bin/plasma-bigscreen-inputhandler
+Exec=@CMAKE_INSTALL_PREFIX@/bin/plasmacouch-inputhandler
 Icon=gamepad
 Type=Application
 X-KDE-PluginInfo-Version=@PROJECT_VERSION@

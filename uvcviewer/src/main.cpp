@@ -18,15 +18,15 @@ int main(int argc, char *argv[])
     KLocalizedString::setApplicationDomain("plasma-bigscreen");
     QApplication::setOrganizationName(QStringLiteral("KDE"));
     QApplication::setOrganizationDomain(QStringLiteral("kde.org"));
-    QApplication::setApplicationName(QStringLiteral("Plasma Bigscreen UVC Viewer"));
-    QApplication::setDesktopFileName(QStringLiteral("org.kde.plasma.bigscreen.uvcviewer"));
+    QApplication::setApplicationName(QStringLiteral("PlasmaCouch UVC Viewer"));
+    QApplication::setDesktopFileName(QStringLiteral("com.plasmacouch.uvcviewer"));
 
     QApplication::setStyle(QStringLiteral("breeze"));
 
     QQmlApplicationEngine engine;
 
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
-    engine.loadFromModule("org.kde.plasma.bigscreen.uvcviewer", "Main");
+    engine.loadFromModule("com.plasmacouch.uvcviewer", "Main");
 
     if (engine.rootObjects().isEmpty()) {
         return -1;

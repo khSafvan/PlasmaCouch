@@ -32,13 +32,13 @@ int main(int argc, char *argv[])
     QCoreApplication app(argc, argv);
     KLocalizedString::setApplicationDomain("plasma-bigscreen-inputhandler");
 
-    KAboutData about(QStringLiteral("org.kde.plasma.bigscreen.inputhandler"),
-                     i18n("Plasma Bigscreen Input Handler"),
+    KAboutData about(QStringLiteral("com.plasmacouch.inputhandler"),
+                     i18n("PlasmaCouch Input Handler"),
                      PROJECT_VERSION,
                      {},
                      KAboutLicense::GPL,
-                     i18n("© 2026 Plasma Development Team"));
-    about.setProductName("Plasma Bigscreen Input Handler");
+                     i18n("© 2026 PlasmaCouch / KDE Development Team"));
+    about.setProductName("PlasmaCouch Input Handler");
 
     KAboutData::setApplicationData(about);
 

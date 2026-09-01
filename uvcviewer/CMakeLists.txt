@@ -3,4 +3,4 @@
 
 add_subdirectory(src)
 
-install(PROGRAMS org.kde.plasma.bigscreen.uvcviewer.desktop DESTINATION ${KDE_INSTALL_APPDIR})
+install(PROGRAMS com.plasmacouch.uvcviewer.desktop DESTINATION ${KDE_INSTALL_APPDIR})

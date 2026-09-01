@@ -1,16 +1,16 @@
-# Plasma Bigscreen
+# PlasmaCouch
 
 [![License: GPL-2.0-or-later](https://img.shields.io/badge/License-GPL%202.0%2B-blue.svg)](LICENSES/GPL-2.0-or-later.txt)
 [![KDE Frameworks](https://img.shields.io/badge/KF6-6.14.0%2B-brightgreen.svg)](https://kde.org)
 [![Qt](https://img.shields.io/badge/Qt-6.10.0%2B-green.svg)](https://www.qt.io)
 
-Plasma Bigscreen is an open-source, Wayland-native desktop shell and media-center environment designed for TVs, HTPCs, and Single Board Computers (SBCs). It provides large-format navigation tailored for game controllers and TV remote controls.
+PlasmaCouch is an open-source, Wayland-native 10-foot UI designed for TV screens, living room HTPCs, and gaming consoles. Built for game controllers and TV remotes, it provides a centralized interface for launching native Linux applications, web applications, Wine/Proton games, and Android applications via Waydroid.
 
 ### Key Features
-- **Remote & Controller Navigation**: Built-in CEC and SDL3 game controller support via `plasma-bigscreen-inputhandler`.
-- **Media-Center Shell**: Tailored homescreen containment, indicators, application launcher, and audio output selector.
-- **Integrated Applications**: Standalone settings manager, WebApp viewer, and UVC camera/device viewer.
-- **KDE Ecosystem**: Seamless integration with KDE Connect, KWin Wayland, and Kirigami UI controls.
+- **Remote & Controller First**: Native CEC TV Remote and SDL3 game controller navigation with auto-suppression and rumble.
+- **Multi-Source Launching**: Unified app discovery for native desktop apps, webapps/PWAs, Wine/Proton titles, and Waydroid apps.
+- **Living Room Applications**: Integrated standalone settings app, camera/input viewer, and WebApp runtime.
+- **Modular Shell**: Lightweight media-center overlay, status indicators, audio output switcher, and virtual keyboard support.
 
 ---
 
@@ -26,7 +26,7 @@ git clone https://github.com/khSafvan/plasma-bigscreen.git && cd plasma-bigscree
 <summary><b>Building with kde-builder (Alternative)</b></summary>
 
 ```bash
-kde-builder plasma-bigscreen
+kde-builder plasmacouch
 ```
 See the [Building and Testing Locally](https://invent.kde.org/plasma/plasma-bigscreen/-/wikis/Building-and-Testing-Locally) wiki for details on managing development prefixes.
 </details>
@@ -40,7 +40,7 @@ See the [Building and Testing Locally](https://invent.kde.org/plasma/plasma-bigs
 - **KDE Frameworks 6**: `KF6::Kirigami`, `KF6::I18n`, `KF6::KCMUtils`, `KF6::BluezQt`, `KF6::KIO`, `KF6::Notifications`, `KF6::WindowSystem`, `KF6::Svg`
 - **System Libraries**: `SDL3`, `libcec` (>= 6.0), `systemd`
 
-### Running Bigscreen in a Window
+### Running PlasmaCouch in a Window
 To test the shell locally inside a Wayland nested window session:
 
 ```bash
@@ -51,16 +51,16 @@ export QT_QUICK_CONTROLS_MOBILE=true
 export PLASMA_INTEGRATION_USE_PORTAL=1
 export PLASMA_PLATFORM=mediacenter
 export QT_FILE_SELECTORS=mediacenter
-export XDG_CONFIG_DIRS="$HOME/.config/plasma-bigscreen:/etc/xdg${XDG_CONFIG_DIRS:+:$XDG_CONFIG_DIRS}"
+export XDG_CONFIG_DIRS="$HOME/.config/plasmacouch:$HOME/.config/plasma-bigscreen:/etc/xdg${XDG_CONFIG_DIRS:+:$XDG_CONFIG_DIRS}"
 
-QT_QPA_PLATFORM=offscreen plasma-bigscreen-envmanager --apply-settings
+QT_QPA_PLATFORM=offscreen plasmacouch-envmanager --apply-settings
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.bigscreen
 dbus-run-session kwin_wayland "plasmashell -p org.kde.plasma.bigscreen"
 ```
 
 ### Running Input Handler Daemon
 ```bash
-PLASMA_PLATFORM=mediacenter plasma-bigscreen-inputhandler
+PLASMA_PLATFORM=mediacenter plasmacouch-inputhandler
 ```
 
 ### Live-Reload & Rapid QML Testing
@@ -91,13 +91,22 @@ npm run format:check
 
 ---
 
+## Roadmap & Architecture Scaffolding
+See [ROADMAP.md](ROADMAP.md) for details on planned features, including:
+- Wine/Proton launcher integration
+- Waydroid Android container discovery and controller touch-mapping
+- RetroArch and emulator rom scanning
+- HDR and dynamic refresh rate switching
+
+---
+
 ## License & Credits
 
-### Upstream Project
-This repository is a maintained fork of [KDE Plasma Bigscreen](https://invent.kde.org/plasma/plasma-bigscreen) created and maintained by the **KDE Community**.
+### Upstream Project & Attribution
+This project is an independent fork of [Plasma Bigscreen](https://invent.kde.org/plasma/plasma-bigscreen) originally created and maintained by the **KDE Community**.
 
-- **Upstream Repository**: [invent.kde.org/plasma/plasma-bigscreen](https://invent.kde.org/plasma/plasma-bigscreen)
-- **Project Homepage**: [plasma-bigscreen.org](https://plasma-bigscreen.org)
+- **Original Project Homepage**: [plasma-bigscreen.org](https://plasma-bigscreen.org)
+- **Original Upstream Repository**: [invent.kde.org/plasma/plasma-bigscreen](https://invent.kde.org/plasma/plasma-bigscreen)
 - **Original Authors & Contributors**:
   - Aditya Mehra (<aix.m@outlook.com>)
   - Marco Martin (<mart@kde.org>)
@@ -108,7 +117,12 @@ This repository is a maintained fork of [KDE Plasma Bigscreen](https://invent.kd
   - Harald Sitter (<sitter@kde.org>)
   - Seshan Ravikumar (<seshan@sineware.ca>)
   - Jonah Brüchert (<jbb@kaidan.im>)
-  - And all contributors to the KDE Project.
+  - And all contributors to the KDE Project (see [NOTICE.md](NOTICE.md)).
+
+### Trademark Disclaimer
+PlasmaCouch is an independent community project and is **not** endorsed by, affiliated with, or an official product of **KDE e.V.** or the **KDE Community**.
+- "KDE", "KDE Plasma", and "Plasma" are registered trademarks of **KDE e.V.**
+- All other trademarks and logos are the property of their respective owners.
 
 ### Fork Information
 - **Fork Maintainer**: Safvan Khalifa ([@khSafvan](https://github.com/khSafvan))

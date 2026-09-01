@@ -8,7 +8,7 @@ import QtQuick.Layouts
 import QtWebEngine
 
 import org.kde.kirigami as Kirigami
-import org.kde.bigscreen.webapp
+import com.plasmacouch.webapp
 
 Kirigami.ApplicationWindow {
     id: webBrowser

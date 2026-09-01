@@ -1,5 +1,6 @@
 #!/bin/sh
 # SPDX-FileCopyrightText: 2025 Seshan Ravikumar <seshan@sineware.ca>
+# SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 set -eu
@@ -10,24 +11,24 @@ if [ "${XDG_CURRENT_DESKTOP:-}" != "KDE" ]; then
     exit 1
 fi
 
-CACHE_DIR="$HOME/.cache/plasma-bigscreen"
+CACHE_DIR="$HOME/.cache/plasmacouch"
 SAVED_ENV="$CACHE_DIR/saved-env"
 
 mkdir -p "$CACHE_DIR"
 
-swap_to_bigscreen() {
+swap_to_plasmacouch() {
     # Save current environment for subsequent restoration
     export -p > "$SAVED_ENV"
 
-    # Source Bigscreen common environment
-    . plasma-bigscreen-common-env
+    # Source PlasmaCouch common environment
+    . plasmacouch-common-env
 
-    export PLASMA_BIGSCREEN_LAUNCH_REASON=swap
+    export PLASMACOUCH_LAUNCH_REASON=swap
 
-    # Start plasma-bigscreen-inputhandler in the background
-    QT_QPA_PLATFORM=offscreen plasma-bigscreen-inputhandler &
+    # Start plasmacouch-inputhandler in the background
+    QT_QPA_PLATFORM=offscreen plasmacouch-inputhandler &
 
-    # Replace running plasmashell instance with Bigscreen shell
+    # Replace running plasmashell instance with PlasmaCouch shell
     plasmashell --replace &
 }
 
@@ -38,19 +39,22 @@ swap_to_default() {
         rm -f "$SAVED_ENV"
     fi
 
+    unset PLASMACOUCH_LAUNCH_REASON || true
     unset PLASMA_BIGSCREEN_LAUNCH_REASON || true
 
-    # Gracefully stop plasma-bigscreen-inputhandler
+    # Gracefully stop plasmacouch-inputhandler
+    pkill -f plasmacouch-inputhandler 2>/dev/null || true
     pkill -f plasma-bigscreen-inputhandler 2>/dev/null || true
 
     # Replace running plasmashell instance with default desktop shell
     plasmashell --replace &
 }
 
-# Toggle between Bigscreen shell and default Plasma desktop
-if [ "${PLASMA_BIGSCREEN_LAUNCH_REASON:-}" = "swap" ]; then
+# Toggle between PlasmaCouch shell and default Plasma desktop
+if [ "${PLASMACOUCH_LAUNCH_REASON:-${PLASMA_BIGSCREEN_LAUNCH_REASON:-}}" = "swap" ]; then
     swap_to_default
 else
-    swap_to_bigscreen
+    swap_to_plasmacouch
 fi
+
 

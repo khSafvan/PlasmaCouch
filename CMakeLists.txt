@@ -1,11 +1,12 @@
 # SPDX-FileCopyrightText: 2019 Aditya Mehra <aix.m@outlook.com>
 # SPDX-FileCopyrightText: 2019 Marco Martin <mart@kde.org>
+# SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 # Set minimum CMake version (required for CMake 3.0 or later)
 cmake_minimum_required(VERSION 3.24)
 
-project(plasma-bigscreen)
+project(plasmacouch)
 set(PROJECT_VERSION "6.7.80")
 
 set(QT_MIN_VERSION "6.10.0")
@@ -113,7 +114,7 @@ add_subdirectory(kded)
 plasma_install_package(shell org.kde.plasma.bigscreen shells)
 plasma_install_package(lookandfeel org.kde.plasma.bigscreen look-and-feel lookandfeel)
 
-install(FILES org.kde.plasma.bigscreen.metainfo.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
+install(FILES com.plasmacouch.metainfo.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})

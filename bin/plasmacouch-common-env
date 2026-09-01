@@ -2,9 +2,10 @@
 # SPDX-FileCopyrightText: 2020 Bart Ribbers <bribbers@disroot.org>
 # SPDX-FileCopyrightText: 2021 Aleix Pol <apol@kde.org>
 # SPDX-FileCopyrightText: 2025 Seshan Ravikumar <seshan@sineware.ca>
+# SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-# Common environment configuration for Plasma Bigscreen sessions
+# Common environment configuration for PlasmaCouch sessions
 
 # Source system-wide profile if available
 if [ -f /etc/profile ]; then
@@ -14,21 +15,22 @@ fi
 # Qt font rendering optimizations
 export QT_ENABLE_GLYPH_CACHE_WORKAROUND=1
 
-# Plasma desktop shell and integration settings
+# Desktop shell and integration settings
 export PLASMA_INTEGRATION_USE_PORTAL=1
 export PLASMA_PLATFORM=mediacenter
 export QT_FILE_SELECTORS=mediacenter
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.bigscreen
-export KWIN_IM_SHOW_ALWAYS=1 # Always show plasma virtual keyboard
+export KWIN_IM_SHOW_ALWAYS=1 # Always show virtual keyboard
 
-# Set ~/.config/plasma-bigscreen as high-priority configuration directory
-export XDG_CONFIG_DIRS="$HOME/.config/plasma-bigscreen:/etc/xdg${XDG_CONFIG_DIRS:+:$XDG_CONFIG_DIRS}"
+# Set ~/.config/plasmacouch as high-priority configuration directory
+export XDG_CONFIG_DIRS="$HOME/.config/plasmacouch:$HOME/.config/plasma-bigscreen:/etc/xdg${XDG_CONFIG_DIRS:+:$XDG_CONFIG_DIRS}"
 
 # Enable DrKonqi crash handling if systemd-coredump is active
 if [ -r /proc/sys/kernel/core_pattern ] && grep -q '/systemd-coredump' /proc/sys/kernel/core_pattern 2>/dev/null; then
     export KDE_COREDUMP_NOTIFY=1
 fi
 
-# Apply Bigscreen environment settings via envmanager
-QT_QPA_PLATFORM=offscreen plasma-bigscreen-envmanager --apply-settings
+# Apply PlasmaCouch environment settings via envmanager
+QT_QPA_PLATFORM=offscreen plasmacouch-envmanager --apply-settings
+
 

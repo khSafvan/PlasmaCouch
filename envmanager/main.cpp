@@ -33,8 +33,8 @@ int main(int argc, char *argv[])
     parser->process(app);
 
     // start wizard
-    KLocalizedString::setApplicationDomain("plasma-bigscreen-envmanager");
-    QCoreApplication::setApplicationName(u"plasma-bigscreen-envmanager"_s);
+    KLocalizedString::setApplicationDomain("plasmacouch-envmanager");
+    QCoreApplication::setApplicationName(u"plasmacouch-envmanager"_s);
     QCoreApplication::setOrganizationDomain(u"kde.org"_s);
 
     // apply configuration

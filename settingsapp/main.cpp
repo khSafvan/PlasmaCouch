@@ -29,13 +29,13 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
 
-    KAboutData aboutData(QStringLiteral("plasma-bigscreen-settings"),
-                         i18n("Bigscreen Settings"),
+    KAboutData aboutData(QStringLiteral("com.plasmacouch.settings"),
+                         i18n("PlasmaCouch Settings"),
                          QStringLiteral("0.1"),
-                         i18n("Plasma Bigscreen Settings"),
+                         i18n("PlasmaCouch Settings"),
                          KAboutLicense::GPL,
-                         i18n("© 2025 Plasma developers"));
-    aboutData.setDesktopFileName(QStringLiteral("org.kde.plasma.bigscreen.settings"));
+                         i18n("© 2026 PlasmaCouch / KDE developers"));
+    aboutData.setDesktopFileName(QStringLiteral("com.plasmacouch.settings"));
 
     QCommandLineOption moduleOption{QStringLiteral("m"), QStringLiteral("module"), i18n("Settings module to open"), QString()};
     QCommandLineParser parser;
@@ -52,10 +52,10 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     KLocalization::setupLocalizedContext(&engine);
 
-    auto settingsApp = engine.singletonInstance<SettingsApp *>("org.kde.plasma.bigscreen.settings", "SettingsApp");
+    auto settingsApp = engine.singletonInstance<SettingsApp *>("com.plasmacouch.settings", "SettingsApp");
     settingsApp->setLaunchModule(parser.value(moduleOption));
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
-    engine.loadFromModule(QStringLiteral("org.kde.plasma.bigscreen.settings"), QStringLiteral("Main"));
+    engine.loadFromModule(QStringLiteral("com.plasmacouch.settings"), QStringLiteral("Main"));
 
     // Error handling
     if (engine.rootObjects().isEmpty()) {

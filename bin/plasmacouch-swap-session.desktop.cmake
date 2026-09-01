@@ -1,8 +1,10 @@
 # SPDX-FileCopyrightText: 2025 Seshan Ravikumar <seshan@sineware.ca>
+# SPDX-FileCopyrightText: 2026 Safvan Khalifa <khalifasafvan@yahoo.com>
 # SPDX-License-Identifier: GPL-2.0-or-later
 [Desktop Entry]
 Type=Application
-Name=Plasma Bigscreen
+Name=PlasmaCouch
+Name[en_GB]=PlasmaCouch
 Name[ar]=بلازما الشاشة الكبيرة
 Name[az]=Plasma Böyük Ekran
 Name[bg]=Plasma Bigscreen
@@ -46,11 +48,11 @@ Name[ug]=Plasma چوڭ ئېكران
 Name[uk]=Плазма для великих екранів
 Name[zh_CN]=Plasma 大屏幕
 Name[zh_TW]=Plasma 大螢幕
-Exec=plasma-bigscreen-swap-session
+Exec=plasmacouch-swap-session
 Icon=applications-multimedia
 Terminal=false
 Categories=AudioVideo
-Comment=Switch into a Plasma Bigscreen session
+Comment=Switch into a PlasmaCouch session
 Comment[ar]=بدّل إلى جلسة بلازما الشاشة الكبيرة
 Comment[bg]=Превключване към сесия на Plasma Bigscreen
 Comment[ca]=Canvia a una sessió del Plasma Bigscreen
